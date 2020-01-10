@@ -1,5 +1,5 @@
 # talkToRobots
-reads robots.txt files and writes down what they say (if you are checking a list of files).
+reads robots.txt files then print and log what they say.
 
 `python3 talkToRobots.py -s https://github.com`
 
