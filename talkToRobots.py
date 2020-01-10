@@ -21,7 +21,7 @@ ap.add_argument("-s", "--starturl", required=False, help="Starting URL if checki
 ap.add_argument("-f", "--file", required=False, help="File of FQDNs to check.")
 args = vars(ap.parse_args())
 
-logName = 'robotRandom'+str(random.randint(100,500))+'.txt'
+logName = 'robots'+str(random.randint(100,500))+'.txt'
 
 def make_robot(url):
     fqdn = fqdn = urllib.parse.urlsplit(url.strip())
@@ -52,8 +52,11 @@ def talk_to_robots(url):
 
 if __name__ == '__main__':
     if args["starturl"]:
+        log = open(logName,'w')
         print("Checking for robots @ %s"%args["starturl"].strip())
         talk_to_robots(make_robot(args["starturl"].strip()))
+        print("Data written to %s"%logName)
+        log.close()
     elif args["file"]:
         if not os.path.isfile(args["file"]):
             print("We can't find the file you would like to check.")
@@ -65,4 +68,5 @@ if __name__ == '__main__':
                     talk_to_robots(make_robot(line))
             print("Data written to %s"%logName)
             log.close()
-                    
+    else:
+        print("We need at least one argument. Run python3 talkToRobots.py -h")
